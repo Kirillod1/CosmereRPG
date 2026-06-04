@@ -1,16 +1,23 @@
 ﻿from fastapi import FastAPI, Depends, HTTPException
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from sqlalchemy.orm import Session
 import models
 from database import engine, get_db
 
-# Ta linijka automatycznie stworzy plik bazy danych i tabele na podstawie modeli z models.py
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="Cosmere RPG API")
 
+# Mówimy FastAPI, gdzie leżą nasze statyczne pliki (CSS, obrazki)
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
+# Zmieniony endpoint strony głównej - teraz zwraca nasz plik HTML!
 @app.get("/")
-def powitanie():
-    return {"Wiadomość": "Podróż przed celem! Witaj w Cosmere RPG API."}
+def strona_glowna():
+    return FileResponse("static/index.html")
+
+# --- TUTAJ ZOSTAW PONIŻEJ SWOJE ENDPOINTY POST i GET do /characters/ ---
 
 # Endpoint 1: Tworzenie nowej postaci
 @app.post("/characters/")
