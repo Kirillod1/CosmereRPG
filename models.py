@@ -5,6 +5,15 @@ from sqlalchemy.ext.declarative import declarative_base
 # To jest baza, z której będą dziedziczyć wszystkie nasze tabele
 Base = declarative_base()
 
+class User(Base):
+    __tablename__ = "users"
+
+    id = Column(Integer, primary_key=True, index=True)
+    username = Column(String, unique=True, index=True, nullable=False)
+    email = Column(String, unique=True, index=True, nullable=False)
+    hashed_password = Column(String, nullable=False)
+    role = Column(String, default="player") # Domyślnie każdy jest graczem. Mistrz Gry to będzie np. "gm"
+
 class Character(Base):
     __tablename__ = "characters"
 

@@ -4,41 +4,105 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cosmere RPG - Wirtualny Stół</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/static/style.css">
 </head>
-<body>
-    <nav class="navbar">
-        <div class="logo">Cosmere RPG <span>VTT</span></div>
-        <ul class="nav-links">
-            <li><a href="#">Kolekcja Postaci</a></li>
-            <li><a href="#">Kampanie</a></li>
-            <li><a href="#">Zasady</a></li>
-        </ul>
-        <div class="auth-buttons">
-            <a href="#" class="btn-login">Zaloguj</a>
-            <a href="#" class="btn-register">Rejestracja</a>
+<body class="bg-dark text-light"> <nav class="navbar navbar-expand-lg navbar-dark border-bottom border-warning pb-2 pt-3 custom-navbar">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">Cosmere RPG <span class="text-warning">VTT</span></a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="#">Kolekcja Postaci</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Kampanie</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Zasady</a></li>
+                </ul>
+                <!-- Przyciski Logowania/Rejestracji -->
+                <div class="d-flex gap-2" id="authButtons">
+                    <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#loginModal">Zaloguj</button>
+                    <button class="btn btn-warning fw-bold" data-bs-toggle="modal" data-bs-target="#registerModal">Rejestracja</button>
+                </div>
+
+                <!-- Rozwijane menu użytkownika (Domyślnie ukryte) -->
+                <div class="dropdown d-none" id="userMenu">
+                    <button class="btn btn-outline-warning dropdown-toggle fw-bold" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        Witaj, Gracz
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark" aria-labelledby="userDropdown">
+                        <li><a class="dropdown-item" href="#">Moje Postacie</a></li>
+                        <li><a class="dropdown-item" href="#">Moje Kampanie</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item text-danger" href="#" id="btnLogout">Wyloguj się</a></li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </nav>
 
-    <main class="hero-section">
-        <h1>Wybierz swój świat</h1>
-        <p>Rozpocznij przygodę w uniwersum Brandona Sandersona</p>
+    <main class="container text-center py-5">
+        <h1 class="display-4 fw-bold text-white mb-2">Wybierz swój świat</h1>
+        <p class="text-secondary mb-5 fs-5">Rozpocznij przygodę w uniwersum Brandona Sandersona</p>
         
         <div class="world-selection">
-            <a href="#" class="world-card stormlight">
-                <div class="card-content">
-                    <h2>Archiwum Burzowego Światła</h2>
-                    <p>Wypowiedz Przysięgi, zwiąż Sprena i dołącz do Świetlistych Rycerzy na targanym burzami Rosharze.</p>
+            <a href="#" class="world-card stormlight text-decoration-none">
+                <div class="card-content w-100 p-4 text-start">
+                    <h2 class="text-warning h3">Archiwum Burzowego Światła</h2>
+                    <p class="text-light m-0">Wypowiedz Przysięgi, zwiąż Sprena i dołącz do Świetlistych Rycerzy na targanym burzami Rosharze.</p>
                 </div>
             </a>
-
-            <a href="#" class="world-card mistborn">
-                <div class="card-content">
-                    <h2>Z Mgły Zrodzony</h2>
-                    <p>Opanuj sztukę Allomancji, szybuj we mgle i stań do walki o przetrwanie w spowitym popiołem świecie Scadrial.</p>
+            <a href="#" class="world-card mistborn text-decoration-none">
+                <div class="card-content w-100 p-4 text-start">
+                    <h2 class="text-warning h3">Z Mgły Zrodzony</h2>
+                    <p class="text-light m-0">Opanuj sztukę Allomancji, szybuj we mgle i stań do walki o przetrwanie w spowitym popiołem świecie Scadrial.</p>
                 </div>
             </a>
         </div>
     </main>
+
+    <div class="modal fade" id="registerModal" tabindex="-1" data-bs-theme="dark">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content custom-modal-border">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title text-warning w-100 text-center fw-bold">Dołącz do drużyny</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body px-4 pb-4">
+                    <form id="registerForm" class="d-flex flex-col gap-3 flex-column">
+                        <input type="text" id="regUsername" class="form-control bg-dark text-light border-secondary" placeholder="Nazwa użytkownika" required>
+                        <input type="email" id="regEmail" class="form-control bg-dark text-light border-secondary" placeholder="Adres E-mail" required>
+                        <input type="password" id="regPassword" class="form-control bg-dark text-light border-secondary" placeholder="Hasło" required>
+                        <button type="submit" class="btn btn-warning fw-bold mt-2">Zarejestruj się</button>
+                    </form>
+                    <p id="regMessage" class="text-center mt-3 mb-0 small"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="loginModal" tabindex="-1" data-bs-theme="dark">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content custom-modal-border">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title text-light w-100 text-center fw-bold">Zaloguj się</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body px-4 pb-4">
+                    <form id="loginForm" class="d-flex flex-col gap-3 flex-column">
+                        <input type="text" id="logLogin" class="form-control bg-dark text-light border-secondary" placeholder="Nazwa użytkownika lub E-mail" required>
+                        <input type="password" id="logPassword" class="form-control bg-dark text-light border-secondary" placeholder="Hasło" required>
+                        <button type="submit" class="btn btn-outline-light fw-bold mt-2">Wejdź do gry</button>
+                    </form>
+                    <p id="logMessage" class="text-center mt-3 mb-0 small"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/script.js"></script>
 </body>
 </html>

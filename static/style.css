@@ -1,107 +1,25 @@
-/* Resetowanie domyślnych marginesów przeglądarki */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
+/* Tło strony (nadpisanie Bootstrapa dla lepszego klimatu) */
 body {
-    background-color: #0f1115; /* Bardzo ciemny szary/granat */
-    color: #e0e0e0;
+    background-color: #0f1115 !important; 
 }
 
-/* --- NAVBAR --- */
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.custom-navbar {
     background-color: #1a1d24;
-    padding: 15px 40px;
-    border-bottom: 2px solid #d4af37; /* Złoty akcent Cosmere */
 }
 
-.logo {
-    font-size: 24px;
-    font-weight: bold;
-    color: #fff;
-}
-
-.logo span {
-    color: #d4af37; /* Złote VTT */
-}
-
-.nav-links {
-    list-style: none;
-    display: flex;
-    gap: 30px;
-}
-
-.nav-links a {
-    color: #a0aab2;
-    text-decoration: none;
-    font-size: 16px;
-    transition: color 0.3s;
-}
-
-.nav-links a:hover {
-    color: #d4af37;
-}
-
-.auth-buttons {
-    display: flex;
-    gap: 15px;
-}
-
-.btn-login {
-    color: #fff;
-    text-decoration: none;
-    padding: 8px 20px;
-    border: 1px solid #8c9baf;
-    border-radius: 5px;
-    transition: all 0.3s;
-}
-
-.btn-login:hover {
-    background-color: #8c9baf;
-    color: #0f1115;
-}
-
-.btn-register {
-    color: #0f1115;
-    background-color: #d4af37;
-    text-decoration: none;
-    padding: 8px 20px;
+.custom-modal-border {
+    background-color: #1a1d24;
     border: 1px solid #d4af37;
-    border-radius: 5px;
-    transition: all 0.3s;
-    font-weight: bold;
+    box-shadow: 0 5px 30px rgba(0,0,0,0.9);
 }
 
-.btn-register:hover {
-    background-color: #b5952f;
-    border-color: #b5952f;
+/* Wnętrze karty (ciemny gradient dla czytelności tekstu) */
+.card-content {
+    background: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.5) 70%, transparent 100%);
+    min-height: 120px;
 }
 
-/* --- SEKCJA GŁÓWNA --- */
-.hero-section {
-    text-align: center;
-    padding: 60px 20px;
-}
-
-.hero-section h1 {
-    font-size: 40px;
-    margin-bottom: 10px;
-    color: #ffffff;
-}
-
-.hero-section p {
-    font-size: 18px;
-    color: #8c9baf;
-    margin-bottom: 50px;
-}
-
-/* --- KARTY ŚWIATÓW (Przyciski) --- */
+/* --- EFEKT AKORDEONU (To zostaje, bo to nasza autorska duma) --- */
 .world-selection {
     display: flex;
     justify-content: center;
@@ -109,62 +27,35 @@ body {
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-    height: 500px; /* Ustalamy stałą wysokość tutaj */
+    height: 500px; 
 }
 
 .world-card {
-    text-decoration: none;
-    flex: 1; /* Obie karty zajmują po 50% miejsca */
+    flex: 1; 
     border-radius: 12px;
     display: flex;
     align-items: flex-end;
-    /* Klucz do płynnej animacji rozszerzania i zmiany jasności */
     transition: flex 0.5s cubic-bezier(0.25, 0.8, 0.25, 1), filter 0.5s ease;
     overflow: hidden;
     position: relative;
     border: 1px solid #333;
 }
 
-/* Kiedy najeżdżamy na CAŁY KONTENER, przyciemniamy wszystkie karty */
 .world-selection:hover .world-card {
     filter: brightness(0.6);
 }
 
-/* Kiedy najeżdżamy na KONKRETNĄ KARTĘ, ta karta się powiększa i rozjaśnia */
 .world-selection .world-card:hover {
-    flex: 2.5; /* Ta karta staje się 2.5 raza szersza od drugiej */
+    flex: 2.5; 
     filter: brightness(1.1);
     box-shadow: 0 15px 30px rgba(0,0,0, 0.8);
 }
 
-/* Karta: Archiwum (Przygotowana pod grafikę Kaladina) */
+/* Tła z obrazkami */
 .stormlight {
     background: linear-gradient(to bottom, rgba(15,25,50,0.1), rgba(15,40,90, 0.95)), url('/static/Kaladin.png') center/cover no-repeat;
 }
 
-/* Karta: Z Mgły Zrodzony (Przygotowana pod grafikę Vin) */
 .mistborn {
     background: linear-gradient(to bottom, rgba(50,30,20,0.1), rgba(80,50,40, 0.95)), url('/static/Vin.png') center/cover no-repeat;
-}
-
-/* Wyrównanie tekstów, by były idealnie równe */
-.card-content p {
-    font-size: 15px;
-    color: #cccccc;
-    margin: 0;
-    line-height: 1.5;
-    min-height: 45px; /* Gwarantuje, że oba teksty zajmą tyle samo miejsca w pionie */
-}
-
-.card-content h2 {
-    font-size: 28px;
-    margin-bottom: 10px;
-    color: #d4af37; /* Złoty tytuł */
-}
-
-.card-content p {
-    font-size: 15px;
-    color: #cccccc;
-    margin: 0;
-    line-height: 1.5;
 }
